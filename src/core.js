@@ -88,13 +88,13 @@ jQuery.fn = jQuery.prototype = {
 	last: function() {
 		return this.eq( -1 );
 	},
-
+	// 偶数，平的
 	even: function() {
 		return this.pushStack( jQuery.grep( this, function( _elem, i ) {
 			return ( i + 1 ) % 2;
 		} ) );
 	},
-
+	// 奇数
 	odd: function() {
 		return this.pushStack( jQuery.grep( this, function( _elem, i ) {
 			return i % 2;
@@ -114,7 +114,7 @@ jQuery.fn = jQuery.prototype = {
 
 jQuery.extend = jQuery.fn.extend = function() {
 	var options, name, src, copy, copyIsArray, clone,
-		target = arguments[ 0 ] || {},
+		target = arguments[ 0 ] || {},//第一个参数
 		i = 1,
 		length = arguments.length,
 		deep = false;
@@ -197,19 +197,21 @@ jQuery.extend( {
 	},
 
 	noop: function() {},
-
+	// TODO: 这里不是很清楚，需要后面详细看
 	isPlainObject: function( obj ) {
 		var proto, Ctor;
 
 		// Detect obvious negatives
 		// Use toString instead of jQuery.type to catch host objects
+		// 去掉不是[object Object]的类型和本事false的对象
 		if ( !obj || toString.call( obj ) !== "[object Object]" ) {
 			return false;
 		}
-
+		// 获取原型
 		proto = getProto( obj );
 
 		// Objects with no prototype (e.g., `Object.create( null )`) are plain
+		//是object而且没有原型就是纯粹对象
 		if ( !proto ) {
 			return true;
 		}
